@@ -1,0 +1,13 @@
+.scene-parallax.has-avatar{display:grid;grid-template-columns:minmax(0,1fr) clamp(187.5px,18.75vw,275px);gap:clamp(22px,3vw,48px);align-items:center;width:100%}
+.avatar-slide-content{min-width:0}.avatar-presenter{align-self:start;padding-top:30px;pointer-events:none}
+.avatar-circle{width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid #e3c86eaa;background:radial-gradient(circle at 40% 30%,#e1d2a538,#302d2570);box-shadow:0 12px 32px #14120e38,0 0 20px #e1be2510,inset 0 0 16px #fff1c80d}
+.avatar-circle{position:relative}.avatar-circle video,.avatar-circle .avatar-idle{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:scaleX(-1)}
+.avatar-circle video{opacity:0}.avatar-circle .avatar-idle{opacity:1}.avatar-circle.avatar-playing video{opacity:1}.avatar-circle.avatar-playing .avatar-idle{opacity:0}
+.has-avatar .intro-grid{gap:25px;grid-template-columns:minmax(0,1.7fr) minmax(120px,.7fr)}
+.has-avatar h1{font-size:clamp(32px,3.8vw,59px)}
+@media(max-width:1200px){.has-avatar .new-content-with-photo{grid-template-columns:minmax(0,1fr);gap:20px}.has-avatar .editorial-photo{max-width:380px}.has-avatar .editorial-photo img{max-height:200px}.has-avatar .intro-grid{grid-template-columns:1fr}.has-avatar .intro-stat{max-width:400px}}
+@media(max-width:760px){.scene-parallax.has-avatar{display:flex;flex-direction:column;align-items:stretch;gap:22px}.avatar-presenter{order:-1;width:177.5px;padding:0;align-self:flex-end;margin-bottom:-8px}.has-avatar h1{font-size:36px}.has-avatar .intro-grid{display:grid;grid-template-columns:1fr}.has-avatar .editorial-photo{max-width:none}}
+
+/* El presentador mira hacia el contenido situado a su izquierda. */
+.avatar-circle video{transform:scaleX(-1)}
+.has-avatar .intro-stat{container-type:inline-size}.has-avatar .intro-stat strong{font-size:clamp(44px,28cqw,100px);white-space:nowrap}

@@ -1,0 +1,2 @@
+/* v15: Tutor inactivo por ahora (pedido de Carlo, 3-nov-2026). El botón se ve gris y no abre la bitácora. */
+(()=>{const t=document.getElementById('tutor-toggle');if(!t)return;t.disabled=true;t.setAttribute('aria-disabled','true');t.removeAttribute('aria-haspopup');t.setAttribute('aria-label','Tutor no disponible por ahora');t.title='Tutor no disponible por ahora';t.onclick=null;t.classList.add('tutor-inactive')})();

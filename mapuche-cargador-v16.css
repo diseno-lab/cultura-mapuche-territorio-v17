@@ -1,0 +1,17 @@
+/* v16: cargador inicial con simbología mapuche (pedido de Carlo, 3-nov-2026).
+   Centro: kultrun visto desde arriba (cruz de los cuatro puntos con terminaciones en "pata de ave",
+   sol, luna y estrellas en los cuartos). Anillo exterior: wünelfe (lucero de ocho puntas) y greca escalonada. */
+#cargador-v16{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#5b5349 0%,#3a352f 55%,#24211d 100%);color:#faf6eb;transition:opacity .7s ease,visibility .7s ease;font-family:inherit}
+#cargador-v16.listo{opacity:0;visibility:hidden;pointer-events:none}
+#cargador-v16 .cg-centro{display:grid;justify-items:center;gap:22px;text-align:center;padding:24px}
+#cargador-v16 svg{width:min(46vmin,260px);height:auto;overflow:visible;filter:drop-shadow(0 10px 28px rgba(0,0,0,.35))}
+#cargador-v16 .cg-anillo{transform-origin:130px 130px;animation:cg-girar 26s linear infinite}
+#cargador-v16 .cg-lucero{transform-origin:130px 130px;animation:cg-girar 14s linear infinite reverse}
+#cargador-v16 .cg-kultrun{transform-origin:130px 130px;animation:cg-latido 1.43s ease-in-out infinite}
+#cargador-v16 .cg-titulo{margin:0;font-size:clamp(17px,2.4vmin,22px);letter-spacing:.02em;color:#faf6eb}
+#cargador-v16 .cg-sub{margin:-12px 0 0;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#e1d2a5}
+#cargador-v16 .cg-barra{width:min(52vmin,240px);height:3px;border-radius:3px;background:rgba(225,210,165,.22);overflow:hidden}
+#cargador-v16 .cg-barra i{display:block;height:100%;width:0;background:#ddbd19;border-radius:inherit;transition:width .35s ease}
+@keyframes cg-girar{to{transform:rotate(360deg)}}
+@keyframes cg-latido{0%,100%{transform:scale(1)}12%{transform:scale(1.035)}24%{transform:scale(1)}36%{transform:scale(1.018)}}
+@media (prefers-reduced-motion:reduce){#cargador-v16 .cg-anillo,#cargador-v16 .cg-lucero,#cargador-v16 .cg-kultrun{animation:none}}

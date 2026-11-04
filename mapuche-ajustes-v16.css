@@ -1,0 +1,15 @@
+/* v16: modo inmersivo de respaldo para pantalla completa y aviso breve */
+html.modo-inmersivo-v16,html.modo-inmersivo-v16 body{overflow:hidden}
+html.modo-inmersivo-v16 body{position:fixed;inset:0;width:100vw;height:100dvh}
+#fullscreen[aria-pressed="true"]{color:#ddbd19}
+#aviso-v16{position:fixed;left:50%;bottom:96px;transform:translate(-50%,8px);max-width:min(92vw,520px);padding:10px 16px;border-radius:10px;background:rgba(36,33,29,.94);color:#faf6eb;font-size:13px;line-height:1.4;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:2147482000}
+#aviso-v16.visible{opacity:1;transform:translate(-50%,0)}
+/* v16: botones Cerrar con la X dibujada y centrada (el glifo × de la fuente quedaba descentrado) */
+#layer>.close,dialog>.close:not(:has(span)),.flip-close{padding:0!important;font-size:0!important;line-height:0!important;color:#eadcb9}
+.flip-close{color:#fff0bb}
+.close:has(span)>b{position:relative;display:inline-block!important;width:14px;height:14px;font-size:0!important;line-height:0!important;flex:none}
+#layer>.close::before,#layer>.close::after,dialog>.close:not(:has(span))::before,dialog>.close:not(:has(span))::after,.flip-close::before,.flip-close::after,.close:has(span)>b::before,.close:has(span)>b::after{content:"";position:absolute;left:50%;top:50%;width:44%;height:2px;border-radius:2px;background:currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+.close:has(span)>b::before,.close:has(span)>b::after{width:100%}
+#layer>.close::after,dialog>.close:not(:has(span))::after,.flip-close::after,.close:has(span)>b::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.close:has(span){align-items:center!important}
+html[data-appearance=light] #layer>.close{color:#54451a}

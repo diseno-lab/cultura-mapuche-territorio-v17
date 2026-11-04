@@ -1,0 +1,120 @@
+/* Cultura Mapuche y Territorio — capa "Wall Mapu" v14: composición y movimiento, sin contenido nuevo. */
+@property --v14-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+#wallmapu-atmos,#wallmapu-fx{position:fixed;inset:0;pointer-events:none}
+#wallmapu-atmos{z-index:-1;mix-blend-mode:screen;opacity:.9;transition:opacity .9s ease}
+#wallmapu-atmos[data-off=true]{opacity:0}
+#wallmapu-fx{z-index:40}
+[data-appearance=light] #wallmapu-atmos{mix-blend-mode:multiply;opacity:.55}
+body.is-quiz #wallmapu-atmos{opacity:0}
+
+/* Fondo: respiración lenta tipo Ken Burns, compatible con el parallax existente (propiedad scale independiente). */
+.wallmapu-v14 .backdrop.active{animation:v14-breathe 38s ease-in-out infinite alternate}
+@keyframes v14-breathe{from{scale:1.005}to{scale:1.075}}
+
+/* Luz cálida que sigue al puntero sobre la escena */
+.wallmapu-v14 #stage{position:relative;isolation:isolate}
+.wallmapu-v14 #stage::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px circle at var(--v14-mx,70%) var(--v14-my,40%),#f3d98a17,transparent 62%);transition:background .2s}
+[data-appearance=light] #stage::before,body.is-quiz #stage::before{background:radial-gradient(520px circle at var(--v14-mx,70%) var(--v14-my,40%),#d9b54a14,transparent 62%)}
+
+/* Velo de luz entre láminas */
+#wallmapu-veil{position:fixed;inset:0;z-index:30;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent 30%,#fff2c41f 44%,#f6dc8a3d 50%,#fff2c41f 56%,transparent 70%);background-size:260% 100%;background-position:120% 0}
+#wallmapu-veil.run{animation:v14-veil 1.25s cubic-bezier(.4,.1,.2,1)}
+@keyframes v14-veil{0%{opacity:0;background-position:130% 0}18%{opacity:1}100%{opacity:0;background-position:-40% 0}}
+
+/* Títulos: palabras que emergen y filete dorado que se dibuja */
+.v14-word{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.v14-word>span{display:inline-block;animation:v14-rise .9s cubic-bezier(.2,.75,.25,1) both;animation-delay:calc(var(--i,0)*70ms + 120ms)}
+@keyframes v14-rise{from{transform:translateY(105%);opacity:0;filter:blur(3px)}to{transform:none;opacity:1;filter:none}}
+.v14-rule{display:block;height:2px;width:min(220px,40%);margin:.5em 0 .2em;background:linear-gradient(90deg,#e7c33a,#f7e6a6 55%,transparent);transform-origin:left;animation:v14-draw 1.4s .45s cubic-bezier(.3,.7,.2,1) both;border-radius:2px;box-shadow:0 0 12px #e7c33a66}
+@keyframes v14-draw{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+body.is-quiz .v14-rule{background:linear-gradient(90deg,#b8901a,#e3c86e 60%,transparent);box-shadow:none}
+.cover .v14-rule{width:min(300px,60%)}
+
+/* Imágenes que se "revelan" como una fotografía al aparecer */
+.v14-develop{filter:blur(10px) saturate(.2) brightness(1.15);opacity:.001;transition:filter 1.3s cubic-bezier(.2,.7,.2,1),opacity .9s ease}
+.v14-develop.v14-developed{filter:none;opacity:1}
+.waiting .v14-develop.v14-developed{filter:blur(10px) saturate(.2);opacity:.001}
+
+/* Inclinación 3D y brillo que sigue al cursor en tarjetas e imágenes */
+.v14-tilt{transform:perspective(900px) rotateX(var(--v14-rx,0deg)) rotateY(var(--v14-ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .4s;transform-style:preserve-3d;will-change:transform}
+.v14-tilt:hover{box-shadow:0 18px 40px #0f0d0966,0 0 0 1px #ecd06b55}
+.v14-tilt{position:relative}
+.v14-tilt::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(circle at var(--v14-gx,50%) var(--v14-gy,50%),#fff6d42e,transparent 55%)}
+.v14-tilt:hover::after{opacity:1}
+img.v14-tilt::after{display:none}
+
+/* Borde dorado vivo que orbita en las tarjetas aún por revisar; se apaga al quedar revisadas */
+.wallmapu-v14 :is(.flip-tile:not(.reviewed) .flip-front,.ceremony-button:not(.checked),.site-tile:not(.checked))::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;background:conic-gradient(from var(--v14-angle),transparent 0 68%,#f6dc7c 82%,#fff6d0 86%,transparent 93%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:v14-orbit 5.5s linear infinite;z-index:3}
+.wallmapu-v14 .authority-node:not(.checked){animation:v14-await 3s ease-in-out infinite}
+@keyframes v14-await{50%{box-shadow:0 0 0 1px #f2d66b88,0 0 26px #e7c33a33}}
+@keyframes v14-orbit{to{--v14-angle:360deg}}
+.authority-node.v14-tilt::after{display:none}
+
+/* Presentador: halo que respira mientras la voz suena */
+.avatar-circle{transition:box-shadow .6s}
+body.v14-speaking .avatar-circle{animation:v14-halo 2.6s ease-in-out infinite}
+@keyframes v14-halo{0%,100%{box-shadow:0 12px 32px #14120e38,0 0 0 0 #e7c33a00,0 0 20px #e1be2510}50%{box-shadow:0 12px 32px #14120e38,0 0 0 9px #e7c33a1c,0 0 46px #e1be2540}}
+
+/* Contenidos que aparecen con la voz: entrada con leve destello */
+.speech-reveal:not(.waiting){animation:v14-arrive .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes v14-arrive{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+
+/* Celebración de respuesta correcta */
+.wallmapu-flying-star{position:fixed;left:0;top:0;z-index:60;color:#f6d354;font-size:22px;line-height:1;pointer-events:none;text-shadow:0 0 14px #f6d354,0 0 30px #e7b52a;margin:-11px 0 0 -11px}
+#course-rewards.wallmapu-reward-pulse{animation:v14-reward 1.1s cubic-bezier(.2,.8,.2,1)}
+@keyframes v14-reward{0%{transform:scale(1);text-shadow:none}35%{transform:scale(1.35);text-shadow:0 0 14px #e7c33a}100%{transform:scale(1);text-shadow:none}}
+#layer.wallmapu-correct{box-shadow:0 0 0 1px #e7c33a88,0 0 60px #e7c33a40,0 30px 80px #0008}
+#layer.wallmapu-correct #layer-title{background:linear-gradient(90deg,#b8901a,#f2d66b,#b8901a);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:v14-shine 2.4s linear infinite}
+@keyframes v14-shine{to{background-position:-200% 0}}
+
+/* Índice como sendero */
+.index-list.v14-path{position:relative;padding-left:30px}
+.index-list.v14-path::before,.index-list.v14-path::after{content:'';position:absolute;left:11px;top:20px;bottom:20px;width:2px;border-radius:2px}
+.index-list.v14-path::before{background:#dfd0a640}
+.index-list.v14-path::after{background:linear-gradient(#f6dc7c,#d6ad1f);transform-origin:top;transform:scaleY(var(--v14-progress,0));box-shadow:0 0 10px #e7c33a88;animation:v14-path .9s .15s cubic-bezier(.3,.7,.2,1) both}
+@keyframes v14-path{from{transform:scaleY(0)}}
+.index-list.v14-path button{position:relative;animation:v14-item .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*22ms)}
+@keyframes v14-item{from{opacity:0;transform:translateX(-8px)}}
+.index-list.v14-path button::before{content:'';position:absolute;left:-24px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#3a352b;border:2px solid #dfd0a680;z-index:1}
+.index-list.v14-path button.v14-past::before{background:#e7c33a;border-color:#f6dc7c}
+.index-list.v14-path button[aria-current=step]::before{background:#fff1b8;border-color:#e7c33a;box-shadow:0 0 0 5px #e7c33a33,0 0 14px #e7c33a;animation:v14-node 2s ease-in-out infinite}
+@keyframes v14-node{50%{box-shadow:0 0 0 9px #e7c33a14,0 0 20px #e7c33a}}
+.index-list.v14-path button:disabled::before{background:transparent;border-style:dashed}
+[data-appearance=light] .index-list.v14-path button::before{background:#f1ebdc;border-color:#b9a776}
+[data-appearance=light] .index-list.v14-path button.v14-past::before{background:#c9a21c;border-color:#c9a21c}
+
+/* Cierre: constelación entre los principios */
+.closing-summary-grid{position:relative}
+.v14-constellation{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.v14-constellation path{fill:none;stroke:#f2d66b;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.55;filter:drop-shadow(0 0 4px #e7c33a);animation:v14-trace 4.5s 1.2s cubic-bezier(.4,.1,.2,1) forwards}
+.v14-constellation circle{fill:none;stroke:#f2d66b66;stroke-width:1;transform-box:fill-box;transform-origin:center;animation:v14-ring 3.2s ease-out infinite}
+.v14-constellation circle:nth-of-type(2){animation-delay:.8s}.v14-constellation circle:nth-of-type(3){animation-delay:1.6s}.v14-constellation circle:nth-of-type(4){animation-delay:2.4s}
+@keyframes v14-trace{to{stroke-dashoffset:0}}
+@keyframes v14-ring{0%{transform:scale(.6);opacity:0}30%{opacity:.9}100%{transform:scale(1.6);opacity:0}}
+.closing-principle{position:relative;z-index:1}
+
+/* Movimiento reducido: todo queda estático y legible */
+@media (prefers-reduced-motion:reduce){.wallmapu-v14 *,.wallmapu-v14 *::before,.wallmapu-v14 *::after{animation:none!important}#wallmapu-atmos,#wallmapu-veil{display:none}.v14-develop{filter:none!important;opacity:1!important;transition:none}.v14-tilt{transform:none!important}.v14-constellation path{stroke-dashoffset:0}}
+html[data-reduced-motion=true] html[data-reduced-motion=true] :is(.backdrop.active,.v14-word>span,.v14-rule,.speech-reveal,.avatar-circle,#course-rewards,.index-list.v14-path,.index-list.v14-path button,.v14-constellation path,.v14-constellation circle){animation:none!important}
+html[data-reduced-motion=true] .index-list.v14-path::after,html[data-reduced-motion=true] .index-list.v14-path button::before{animation:none!important}
+html[data-reduced-motion=true] :is(.flip-front,.ceremony-button,.site-tile)::before{animation:none!important;opacity:0}
+html[data-reduced-motion=true] .authority-node{animation:none!important}
+html[data-reduced-motion=true] #wallmapu-atmos,html[data-reduced-motion=true] #wallmapu-veil{display:none}
+html[data-reduced-motion=true] .v14-develop{filter:none!important;opacity:1!important;transition:none}
+html[data-reduced-motion=true] .v14-tilt{transform:none!important}
+html[data-reduced-motion=true] .v14-constellation path{stroke-dashoffset:0}
+
+@media (max-width:760px){.v14-rule{width:120px}#stage::before{display:none}}
+
+/* Portada: amanecer que se enciende detrás del paisaje */
+body[data-v14-slide=cm-s01] #stage::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 45% at 62% 30%,#ffcf7a3a,transparent 70%),radial-gradient(30% 20% at 62% 26%,#fff0c42a,transparent 70%);animation:v14-dawn 5s .3s cubic-bezier(.3,.6,.2,1) both}
+@keyframes v14-dawn{from{opacity:0;transform:translateY(30px) scale(.9)}to{opacity:1;transform:none}}
+/* Pulsación táctil dorada en cada control del contenido */
+.v14-ripple{position:fixed;z-index:45;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;pointer-events:none;border:1.5px solid #f2d66b;box-shadow:0 0 12px #e7c33a88;animation:v14-ripple .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes v14-ripple{from{transform:scale(.4);opacity:1}to{transform:scale(5);opacity:0}}
+/* Ventanas informativas: el fondo se desenfoca para concentrar la lectura */
+#layer::backdrop{backdrop-filter:blur(5px) saturate(.85);-webkit-backdrop-filter:blur(5px) saturate(.85)}
+html[data-reduced-motion=true] body[data-v14-slide=cm-s01] #stage::after,html[data-reduced-motion=true] .v14-ripple{animation:none!important;display:none}
+@media (prefers-reduced-motion:reduce){body[data-v14-slide=cm-s01] #stage::after,.v14-ripple{display:none}}
+.v14-layer-burst{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;border-radius:inherit}

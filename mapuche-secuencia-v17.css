@@ -1,0 +1,51 @@
+/* v17 — aparición de a uno, imágenes grandes y ampliables, sin Tutor. Solo presentación. */
+
+/* Aparición de a uno */
+.v17-unit{transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1),filter .7s ease,visibility 0s}
+.v17-unit.v17-pending{opacity:0!important;transform:translateY(14px) scale(.985);filter:blur(3px);visibility:hidden;pointer-events:none;transition:opacity .25s ease,transform .25s ease,filter .25s ease,visibility 0s .25s}
+.v17-unit.v17-shown{opacity:1;visibility:visible}
+html[data-reduced-motion=true] .v17-unit,html[data-reduced-motion=true] .v17-unit.v17-pending{transform:none!important;filter:none!important;transition:opacity .2s linear,visibility 0s}
+@media (prefers-reduced-motion:reduce){.v17-unit,.v17-unit.v17-pending{transform:none!important;filter:none!important}}
+
+/* Marco: imagen completa (sin recorte) sobre su propio fondo desenfocado */
+.v17-frame{position:relative;display:block;overflow:hidden;border-radius:10px;border:1px solid #d6be7e66;background:#1b1914;isolation:isolate;min-width:0}
+.v17-frame::before{content:'';position:absolute;inset:-24px;background:var(--v17-src) center/cover no-repeat;filter:blur(18px) saturate(1.1) brightness(.62);transform:scale(1.08);z-index:-1}
+.v17-frame>img.source-picture{position:relative;width:100%;object-fit:contain!important;background:transparent!important;border:0!important;border-radius:0!important;margin:0;cursor:zoom-in}
+.v17-frame>img.source-picture.v14-tilt{transform:none!important}
+
+/* Tamaños más generosos (escritorio) */
+@media (min-width:761px){
+ .historical-map .v17-frame>img{height:clamp(270px,44vh,400px)}
+ .culture-mosaic .v17-frame>img{height:clamp(170px,28vh,250px)}
+ .source-demography .v17-frame>img{height:clamp(215px,31vh,330px)}
+ .source-timeline .v17-frame>img{height:clamp(215px,35.5vh,320px)}
+ .ceremonial-sequence .v17-frame>img{height:clamp(195px,31.5vh,290px)}
+ .art-pair .v17-frame{width:48%}.art-pair .v17-frame>img{width:100%;height:clamp(220px,34vh,300px)}
+ .night-strip .v17-frame{max-width:50%;flex:1}.night-strip .v17-frame>img{height:clamp(130px,20vh,180px);max-width:none}
+ .site-strip .v17-frame{width:clamp(170px,16vw,230px)}.site-strip .v17-frame>img{width:100%;height:clamp(115px,17vh,160px)}
+ .respect-source>.v17-frame>img{height:clamp(240px,40vh,340px)}
+ .site-tile>.source-picture{height:clamp(115px,19vh,180px)!important}
+ .ceremony-button>.source-picture{height:clamp(110px,19vh,170px)!important}
+ .closing-view .v17-frame{max-width:340px}.closing-view .v17-frame>img{height:clamp(110px,18vh,170px)}
+}
+.art-pair,.night-strip,.site-strip{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Botón ampliar (aparece al pasar el cursor; siempre visible en táctil) */
+.v17-zoom{position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;padding:0;border:1px solid #f2d66b99;background:#17140fcc;color:#f6dc86;opacity:0;transform:scale(.9);transition:opacity .25s,transform .25s;cursor:zoom-in;z-index:2}
+.v17-zoom svg{width:18px;height:18px}
+.v17-frame:hover .v17-zoom,.v17-zoom:focus-visible{opacity:1;transform:none}
+@media (hover:none){.v17-zoom{opacity:.92;transform:none}}
+
+/* Visor ampliado */
+#v17-viewer{padding:0;margin:auto;border:1px solid #e3c86e88;border-radius:14px;background:#14120e;width:fit-content!important;height:fit-content!important;min-width:0!important;min-height:0!important;max-width:96vw!important;max-height:94vh!important;overflow:hidden;box-shadow:0 30px 90px #000b}
+#v17-viewer::backdrop{background:#0d0b08e0;backdrop-filter:blur(6px)}
+#v17-viewer img{display:block;width:auto;height:auto;max-width:min(96vw,1600px);max-height:94vh;object-fit:contain}
+#v17-viewer .v17-viewer-close{position:absolute;top:12px;right:12px;z-index:3;display:flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 16px;border-radius:999px;border:1px solid #f2d66b;background:#17140fe6;color:#fff3cf;font:600 13px/1 MotorSans,'Segoe UI',Arial,sans-serif;cursor:pointer;box-shadow:0 6px 20px #0008}
+#v17-viewer .v17-viewer-close b{width:13px;height:13px}
+#v17-viewer .v17-viewer-close:hover,#v17-viewer .v17-viewer-close:focus-visible{background:#3a321f;outline:2px solid #f2d66b;outline-offset:2px}
+#v17-viewer[open]{animation:v17-pop .36s cubic-bezier(.2,.8,.2,1)}
+@keyframes v17-pop{from{opacity:0;transform:scale(.96)}}
+html[data-reduced-motion=true] #v17-viewer[open]{animation:none}
+
+/* Tutor eliminado: por si algún estilo reserva su espacio */
+#tutor-toggle{display:none!important}
