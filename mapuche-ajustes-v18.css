@@ -1,0 +1,5 @@
+/* v18 (Carlo, 5-nov-2026): las fotos llenan su recuadro sin deformarse (recorte de bordes);
+   el visor ampliado sigue mostrando la imagen completa. */
+.v17-frame>img.source-picture{object-fit:cover!important;object-position:center}
+/* Excepciones: imágenes con texto o mapas, que perderían información al recortarse */
+.v17-frame>img.source-picture:is([src$="image11.png"],[src$="image14.png"],[src$="image16.png"],[src$="image32.png"]){object-fit:contain!important}

@@ -8,7 +8,7 @@ window.MAPUCHE_DATA={
       "title": "Cultura Mapuche y Territorio",
       "eyebrow": "",
       "view": "cover",
-      "background": "fondo-01-v08.jpg",
+      "background": "fondo-guion-01-collage.jpg",
       "intro": "Cultura Mapuche y Territorio",
       "body": "",
       "items": [],
@@ -136,7 +136,7 @@ window.MAPUCHE_DATA={
       "title": "Cosmovisión: Observación, Interpretación y Acción",
       "eyebrow": "",
       "view": "worldview",
-      "background": "fondo-05-v08.jpg",
+      "background": "fondo-guion-05-cielo.jpg",
       "intro": "Cosmovisión: Observación, Interpretación y Acción",
       "body": "",
       "items": [
@@ -184,7 +184,7 @@ window.MAPUCHE_DATA={
       "title": "El Concepto de ser Mapuche: “Mapu” y “Che”",
       "eyebrow": "",
       "view": "concepts",
-      "background": "fondo-06-v08.jpg",
+      "background": "fondo-guion-06-cielo.jpg",
       "intro": "El Concepto de ser Mapuche: “Mapu” y “Che”",
       "body": "",
       "items": [
@@ -240,7 +240,7 @@ window.MAPUCHE_DATA={
       "title": "Equilibrio Territorial: El Territorio como Espacio Vivo",
       "eyebrow": "",
       "view": "living-territory",
-      "background": "fondo-07-v08.jpg",
+      "background": "fondo-guion-07-araucarias.jpg",
       "intro": "Equilibrio Territorial: El Territorio como Espacio Vivo",
       "body": "",
       "items": [
@@ -544,7 +544,7 @@ window.MAPUCHE_DATA={
       "intro": "Prácticas Culturales: Nguillatún, Mafún, Eluwün y Palín",
       "eyebrow": "",
       "view": "concepts",
-      "background": "fondo-14-v08.jpg",
+      "background": "fondo-guion-14-cielo.jpg",
       "body": "",
       "items": [
         {
@@ -649,7 +649,7 @@ window.MAPUCHE_DATA={
       "intro": "Sitios de Significación Cultural en el Territorio",
       "eyebrow": "",
       "view": "concepts",
-      "background": "fondo-16-v08.jpg",
+      "background": "fondo-guion-16-araucarias.jpg",
       "body": "",
       "items": [
         {
@@ -700,7 +700,7 @@ window.MAPUCHE_DATA={
       "intro": "Energías del Territorio: Newen, Ngen y No Intervención",
       "eyebrow": "",
       "view": "concepts",
-      "background": "fondo-17-v08.jpg",
+      "background": "fondo-guion-17-araucarias.jpg",
       "body": "",
       "items": [
         {
@@ -810,7 +810,7 @@ window.MAPUCHE_DATA={
       "title": "¡FELICITACIONES!",
       "eyebrow": "",
       "view": "closing",
-      "background": "fondo-20-v08.jpg",
+      "background": "fondo-guion-20-marcha.jpg",
       "intro": "¡FELICITACIONES!",
       "body": "",
       "items": [],
@@ -846,7 +846,7 @@ window.MAPUCHE_DATA={
       ]
     }
   ],
-  "revision": "v13-ui-v139",
+  "revision": "v19-interfaz-navegacion",
   "brand": "Academia Arauco",
   "subtitle": "Formación intercultural y Derecho Indígena",
   "lesson_label": "CÁPSULA 1",
